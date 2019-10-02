@@ -14,12 +14,13 @@ public class Game {
 
     public Game(Deck d, int numNPC, int startingMoney, int sBlind) {
         gameDeck = d;
+        // activePlayers must initialize before the npcs.add() call
+        activePlayers = new ArrayList<>();
+        for (int i = 0; i < numNPC + 1; i ++) activePlayers.add(1);
         npcs = new ArrayList<>();
         for (int i = 0; i < numNPC; i ++) {
             npcs.add(new Npc(this, startingMoney));
         }
-        activePlayers = new ArrayList<>();
-        for (int i = 0; i < numNPC + 1; i ++) activePlayers.add(1);
         smallBlind = sBlind;
         bigBlind = sBlind * 2;
 
@@ -31,12 +32,16 @@ public class Game {
         return gameDeck;
     }
 
+    public ArrayList<Npc> getNpcs() {
+        return npcs;
+    }
+
     public ArrayList<Integer> getActivePlayers() {
         return activePlayers;
     }
 
-    public void setActivePlayers() {
-
+    public int getRound() {
+        return round;
     }
 
     public static void main(String[] args) {
